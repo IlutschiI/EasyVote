@@ -35,12 +35,11 @@ class _ResultWidgetState extends State<ResultWidget> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-        width: 200,
-        height: 200,
+    return AspectRatio(
+        aspectRatio: 1,
         child: charts.PieChart(
           createSectionData(),
-          defaultRenderer: charts.ArcRendererConfig(arcWidth: 60, arcRendererDecorators: [charts.ArcLabelDecorator()]),
+          defaultRenderer: charts.ArcRendererConfig(arcWidth: 900000, arcRendererDecorators: [charts.ArcLabelDecorator()]),
         ));
   }
 
