@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'question.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Question {
   String id;
   String text;

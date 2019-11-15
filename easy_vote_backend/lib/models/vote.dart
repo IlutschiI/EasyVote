@@ -4,7 +4,7 @@ import 'option.dart';
 
 part 'vote.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Vote {
 
   Vote(this.id, this.option);

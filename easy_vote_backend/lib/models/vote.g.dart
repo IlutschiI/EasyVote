@@ -17,5 +17,5 @@ Vote _$VoteFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$VoteToJson(Vote instance) => <String, dynamic>{
       'id': instance.id,
-      'option': instance.option,
+      'option': instance.option?.toJson(),
     };

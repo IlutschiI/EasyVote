@@ -16,6 +16,7 @@ class VoteController extends ResourceController {
 
   @Operation.post()
   FutureOr<Response> postVote(@Bind.body() Map<String, dynamic> body) async {
+    print(body);
     Vote vote = Vote.fromJson(body);
     repository.question.votes.add(vote);
     return Response.ok(repository.question.toJson());
