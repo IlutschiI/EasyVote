@@ -3,8 +3,12 @@ import 'package:easy_vote/widget/question_widget.dart';
 import 'package:easy_vote/widget/result_widget2.dart';
 import 'package:easy_vote_backend/models/question.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show debugDefaultTargetPlatformOverride;
 
-void main() => runApp(MyApp());
+void main() {
+  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -51,13 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
           child: question == null
               ? Text("Hello World")
               : SingleChildScrollView(
-                child: Column(
+                  child: Column(
                     children: <Widget>[
                       QuestionWidget(question),
                       if (showResult) ResultWidget(question),
                     ],
                   ),
-              )),
+                )),
     );
   }
 
