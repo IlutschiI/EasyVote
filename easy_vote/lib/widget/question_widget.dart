@@ -6,7 +6,9 @@ import 'package:flutter/widgets.dart';
 class QuestionWidget extends StatelessWidget {
   final Question question;
 
-  QuestionWidget(this.question);
+  final VoidCallback onOptionSelected;
+
+  QuestionWidget(this.question, this.onOptionSelected);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class QuestionWidget extends StatelessWidget {
               question.text,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            OptionsWidget(question.options),
+            OptionsWidget(question.options, onOptionSelected),
           ],
         ),
       ),

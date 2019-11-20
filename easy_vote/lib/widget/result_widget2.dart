@@ -36,14 +36,14 @@ class _ResultWidgetState extends State<ResultWidget> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return AspectRatio(
-        aspectRatio: 1,
-        child: charts.PieChart(
+        aspectRatio: 4/2,
+        child: charts.BarChart(
           createSectionData(),
-          defaultRenderer: charts.ArcRendererConfig(arcWidth: 900000, arcRendererDecorators: [charts.ArcLabelDecorator()]),
+          //defaultRenderer: charts.ArcRendererConfig(arcWidth: 900000, arcRendererDecorators: [charts.ArcLabelDecorator()]),
         ));
   }
 
-  List<charts.Series<Result, int>> createSectionData() {
+  List<charts.Series<Result, String>> createSectionData() {
     var groupBy2 = groupBy<Vote, String>(widget.question.votes, (vote) => vote.option.id);
     List<Result> data = [];
     int count = 0;
@@ -54,9 +54,9 @@ class _ResultWidgetState extends State<ResultWidget> {
     });
     count = 0;
     return [
-      charts.Series<Result, int>(
+      charts.Series<Result, String>(
         id: "Votes",
-        domainFn: (Result result, _) => result.index,
+        domainFn: (Result result, _) => result.text,
         measureFn: (Result result, _) => result.votes,
         data: data,
         labelAccessorFn: (Result result, _) => result.text,
@@ -69,9 +69,6 @@ class _ResultWidgetState extends State<ResultWidget> {
     ];
   }
 
-  charts.Color convertToColor(Color materialColor) {
-    return null;
-  }
 }
 
 class Result {

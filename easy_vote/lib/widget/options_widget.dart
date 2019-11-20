@@ -7,8 +7,9 @@ import 'package:uuid/uuid.dart';
 
 class OptionsWidget extends StatelessWidget {
   final List<Option> options;
+  final VoidCallback onOptionSelected;
 
-  const OptionsWidget(this.options);
+  const OptionsWidget(this.options, this.onOptionSelected);
 
   @override
   Widget build(BuildContext context) {
@@ -31,5 +32,6 @@ class OptionsWidget extends StatelessWidget {
   Future postVote(Option option) async {
     var vote =Vote(Uuid().v1(), option);
     VoteService.sendVote(vote);
+    onOptionSelected();
   }
 }

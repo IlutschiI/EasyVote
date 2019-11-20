@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
               : SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      QuestionWidget(question),
+                      QuestionWidget(question, reloadQuestion),
                       if (showResult) ResultWidget(question),
                     ],
                   ),
@@ -71,5 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
       this.question = question;
       showResult = !showResult;
     });
+  }
+
+  Future reloadQuestion(){
+    VoteService.loadQuestion().then((question) => this.setState(() {
+      this.question = question;
+    }));
   }
 }
