@@ -2,8 +2,8 @@ import 'package:easy_vote/services/vote_service.dart';
 import 'package:easy_vote/widget/question_widget.dart';
 import 'package:easy_vote/widget/result_widget2.dart';
 import 'package:easy_vote_backend/models/question.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show debugDefaultTargetPlatformOverride;
+import 'package:flutter/material.dart';
 
 void main() {
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
@@ -58,7 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: <Widget>[
                       QuestionWidget(question, reloadQuestion),
-                      if (showResult) ResultWidget(question),
+                      AnimatedContainer(
+                        child: ResultWidget(question),
+                        duration: Duration(milliseconds: 500),
+                        height: showResult ? 200 : 0,
+                      ),
                     ],
                   ),
                 )),
@@ -73,9 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future reloadQuestion(){
-    VoteService.loadQuestion().then((question) => this.setState(() {
+  Future reloadQuestion() async {
+    var question = await VoteService.loadQuestion();
+    setState(() {
       this.question = question;
-    }));
+    });
   }
 }

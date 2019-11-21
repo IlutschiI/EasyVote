@@ -1,10 +1,9 @@
+import 'package:charts_flutter/flutter.dart' as charts;
+import "package:collection/collection.dart";
 import 'package:easy_vote_backend/models/question.dart';
 import 'package:easy_vote_backend/models/vote.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-
-import "package:collection/collection.dart";
 
 class ResultWidget extends StatefulWidget {
   final Question question;
@@ -30,17 +29,31 @@ class _ResultWidgetState extends State<ResultWidget> {
     charts.Color.fromHex(code: "#cddc39"),
     charts.Color.fromHex(code: "#ff5722"),
   ];
-  int touch_index = -1;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return AspectRatio(
-        aspectRatio: 4/2,
-        child: charts.BarChart(
-          createSectionData(),
-          //defaultRenderer: charts.ArcRendererConfig(arcWidth: 900000, arcRendererDecorators: [charts.ArcLabelDecorator()]),
-        ));
+    var marginSpec = charts.MarginSpec.fixedPixel(0);
+    return LayoutBuilder(
+      builder: (ctx, constraints) {
+        if (constraints.maxHeight > 50) {
+          return Card(
+            child: Container(
+              width: double.infinity,
+              height: 200,
+              child: charts.BarChart(
+                createSectionData(),
+                vertical: false,
+                //layoutConfig: charts.LayoutConfig(leftMarginSpec: marginSpec, topMarginSpec: charts.MarginSpec.defaultSpec, rightMarginSpec: marginSpec, bottomMarginSpec: charts.MarginSpec.defaultSpec),
+                //defaultRenderer: charts.ArcRendererConfig(arcWidth: 900000, arcRendererDecorators: [charts.ArcLabelDecorator()]),
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   List<charts.Series<Result, String>> createSectionData() {
@@ -68,7 +81,6 @@ class _ResultWidgetState extends State<ResultWidget> {
       )
     ];
   }
-
 }
 
 class Result {

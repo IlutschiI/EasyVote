@@ -30,8 +30,8 @@ class OptionsWidget extends StatelessWidget {
   }
 
   Future postVote(Option option) async {
-    var vote =Vote(Uuid().v1(), option);
-    VoteService.sendVote(vote);
+    var vote = Vote(Uuid().v1(), option);
+    await VoteService.sendVote(vote);
     onOptionSelected();
   }
 }
